@@ -2,6 +2,5 @@
 
 require_relative '../config/environment'
 
-#CovidController.new.call
-info = State.get_or_create_state_info("WA")
-puts info.total_positive_cases
+CovidController.new.call
+
