@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry' -- removing this
 require 'httparty'
 
 require 'bundler'
