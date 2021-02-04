@@ -25,7 +25,9 @@ class CovidController
     def state_covid_options(state_name)
         state = State.get_or_create_state_info(state_name)
 
-        puts "Viewing information for #{state.name} (last updated on #{state.last_update_date}):"
+        print "Viewing information for ".red
+        print "#{state.name}".yellow        
+        puts " (last updated on #{state.last_update_date}):".red
         puts "----------------------------------------------------------------"
         puts "Please choose from the following list of options:"
         puts "1. View total positive cases".green
@@ -41,19 +43,19 @@ class CovidController
     def user_selection(state, state_name)
         input = gets.strip
         if input == "1"
-            puts "Total positive cases in #{state.name} is #{state.total_positive_cases}".blue
+            puts "Total positive cases in #{state.name} is #{state.total_positive_cases}".red
             self.state_covid_options(state_name)
         elsif input == "2"
-            puts "Number of current hospitalized people in #{state.name} is #{state.in_hospital}".blue
+            puts "Number of current hospitalized people in #{state.name} is #{state.in_hospital}".red
             self.state_covid_options(state_name)
         elsif input == "3"
-            puts "Last day's positive cases in #{state.name} is #{state.last_day_positive}".blue
+            puts "Last day's positive cases in #{state.name} is #{state.last_day_positive}".red
             self.state_covid_options(state_name)
         elsif input == "4"
-            puts "Total death count in #{state.name} is #{state.total_deaths}".blue
+            puts "Total death count in #{state.name} is #{state.total_deaths}".red
             self.state_covid_options(state_name)
         elsif input == "5"
-            puts "Last day's death count in #{state.name} is #{state.last_day_deaths}".blue
+            puts "Last day's death count in #{state.name} is #{state.last_day_deaths}".red
             self.state_covid_options(state_name)
         elsif input == "6"
             self.prompt_for_state
