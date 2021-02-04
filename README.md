@@ -22,6 +22,10 @@ The application will start by asking for a state. Once a state is entered, the u
 
 When done, the user can always go back to the main menu to change a state or exit.
 
+## License
+
+This project is licensed under [MIT](LICENSE.md)
+
 ## Authors
 
   - **Mengsha Li**
