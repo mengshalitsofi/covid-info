@@ -1,3 +1,7 @@
+# This class has the list of states (code=>name) and each state information (state code=>info)
+# The state list is to avoid API calls causing errors because the state is invalid.
+# In order to not call the API every time for data that was already downloaded, the state_info is used
+# to keep track of everything that was downloaded.
 class State
     @@state_list = {}
     @@state_info = {}
