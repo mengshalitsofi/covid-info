@@ -7,15 +7,17 @@ class Api
         response = HTTParty.get("https://api.covidtracking.com/v1/states/info.json")
         result = {}
         response.each do |item|
-            result[item["state"]] = item["name"]
+            result[item["state"].downcase] = item["name"]
         end
         result
     end
 
     # get specific statistics for a state. The information will be parsed as a JSON and used to create StateInfo object.
     def self.get_covid_info_by_state(state)
-        response = HTTParty.get("https://api.covidtracking.com/v1/states/#{state.downcase}/current.json")
+        response = HTTParty.get("https://api.covidtracking.com/v1/states/#{state}/current.json")
         info_hash = {
+            code: state,
+            name: State.get_state_name(state),
             last_update_date: parse_date(response["date"].to_s),
             total_positive_cases: response["positive"],
             in_hospital: response["hospitalizedCurrently"],
@@ -23,7 +25,7 @@ class Api
             total_deaths: response["death"],
             last_day_deaths: response["deathIncrease"]
          }
-        StateInfo.new(info_hash)
+        State.new(info_hash)
     end
 
     def self.parse_date(date_string)

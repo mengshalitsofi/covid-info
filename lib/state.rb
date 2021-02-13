@@ -6,6 +6,15 @@ class State
     @@state_list = {}
     @@state_info = {}
 
+    attr_accessor :last_update_date, :total_positive_cases, :in_hospital, :last_day_positive, :total_deaths, :last_day_deaths, :code, :name
+
+    def initialize(hash)
+        hash.each do |key, value|
+            #self.class.attr_accessor(key)
+            self.send("#{key}=", value) if self.respond_to?("#{key}=")
+        end
+    end
+
     def self.get_or_create_state_list
         if @@state_list == {}
             # if we are here, the state_list is empty, which means we didn't
@@ -20,12 +29,15 @@ class State
     def self.get_or_create_state_info(state)        
         if !@@state_info.has_key?(state)            
             @@state_info[state] = Api.get_covid_info_by_state(state)            
-            @@state_info[state].name = @@state_list[state]
         end
         @@state_info[state]        
     end
 
-    def self.valid?(state_name)
-        get_or_create_state_list.has_key?(state_name)
+    def self.valid?(state_code)
+        get_or_create_state_list.has_key?(state_code)
+    end
+
+    def self.get_state_name(state_code)
+        @@state_list[state_code]
     end
 end
