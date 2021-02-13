@@ -1,7 +1,7 @@
-#require 'pry' -- removing this
+require 'pry' 
 require 'httparty'
 
-require 'bundler'
+require 'bundler/setup'
 Bundler.require
 
 require_all 'lib'
